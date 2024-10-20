@@ -1,7 +1,7 @@
 import numpy as np
 
-def value_iteration(P, R, gamma, theta=1e-6):
-    N = len(R)
+def dynamic_programming(P, R, gamma, theta=1e-6):
+    N = len(P)
     V = np.zeros(N)  # Initial value function
     delta = float('inf')
     
@@ -12,7 +12,7 @@ def value_iteration(P, R, gamma, theta=1e-6):
             V_new[s] = R[s] + gamma * np.sum(P[s, :] * V)
         delta = np.max(np.abs(V_new - V))
         V = V_new
-    
+
     return V
 
 P = np.array([[0.6, 0.4, 0.0],
@@ -22,6 +22,6 @@ P = np.array([[0.6, 0.4, 0.0],
 R = np.array([1, 0, 10])
 gamma = 0.9
 
-V = value_iteration(P, R, gamma)
-print("Value function for each state:")
+V = dynamic_programming(P, R, gamma)
+print("Value:")
 print(V)
